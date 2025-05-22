@@ -2,10 +2,6 @@ const tasksCompletedText = document.getElementById('tasks-completed');
 const form = document.querySelector('form');
 const taskInputField = document.getElementById('taskfield');
 
-const tasks = [
-
-]
-
 function updateTasksCompleted(tasksCompleted, totalTasks) {
     if (tasksCompleted <= 0) {
         tasksCompletedText.style.visibility = 'hidden';
@@ -13,17 +9,11 @@ function updateTasksCompleted(tasksCompleted, totalTasks) {
         tasksCompletedText.style.visibility = 'visible';
     }
 
-    tasksCompletedText.innerHTML = `${tasksCompleted} of ${totalTasks} completed`;
+    tasksCompletedText.innerHTML = `${tasksCompleted} of ${totalTasks} tasks completed`;
 }
 
-function getTasksCompleted() {
-    let tasksCompleted = 0;
-    for (let task of tasks) {
-        if (task.complete) {
-            tasksCompleted += 1;
-        }
-    }
-    return tasksCompleted;
+function getTasksCompleted(tasks) {
+  return tasks.filter(task => task.complete).length;
 }
 
 form.addEventListener('submit', (event) => {
@@ -39,18 +29,16 @@ form.addEventListener('submit', (event) => {
 });
 
 fetch('../tasks.json')
-    .then((response) => {
-        return response.json();
-    })
-    .then((json) => {
-        for (let task of json) {
+    .then((response) => response.json())
+    .then((tasks) => {
+        for (let task of tasks) {
             const content = task.content
             const complete = task.complete
             const created = task.created
             // TODO: create task on screen here...
             console.log(content);
         }
+        updateTasksCompleted(getTasksCompleted(tasks), tasks.length);
     })
 
 console.log('Hello World!');
-updateTasksCompleted(getTasksCompleted(), tasks.length);

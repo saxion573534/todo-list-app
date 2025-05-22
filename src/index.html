@@ -12,10 +12,17 @@
         <div class="container">
             <h1>Todo List!</h1>
             <form>
-                <input id="taskfield" type="text" placeholder="Add a new task"/>
+                <input id="taskfield" type="text" placeholder="Add a new task" autocomplete="off"/>
             </form>
             <p class="blended">Hint: Press the add button or enter when you're done!</p>
-            <p class="blended" id="tasks-completed">0 of 0 tasks completed</p>
+            <div class="tasks">
+                <div class="task">
+                    <input class="checkbox" type="checkbox"/>
+                    <p class="task-title">leetcode exercises</p>
+                    <button class="close-task">X</button>
+                </div>
+            </div>
+            <p class="blended" id="tasks-completed">x of y tasks completed</p>
         </div>
     </main>
 </body>
