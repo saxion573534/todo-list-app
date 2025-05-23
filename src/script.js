@@ -3,14 +3,17 @@ const form = document.querySelector('form');
 const taskInputField = document.getElementById('taskfield');
 const tasks = document.getElementById('tasks');
 
-function updateTasksCompleted(tasksCompleted, totalTasks) {
-    if (tasksCompleted <= 0) {
+let tasksComplete = 0;
+let totalTasks = 0;
+
+function updateTasksCompleted() {
+    if (totalTasks <= 0) {
         tasksCompletedText.style.visibility = 'hidden';
     } else {
         tasksCompletedText.style.visibility = 'visible';
     }
 
-    tasksCompletedText.innerHTML = `${tasksCompleted} of ${totalTasks} tasks completed`;
+    tasksCompletedText.innerHTML = `${tasksComplete} of ${totalTasks} tasks completed`;
 }
 
 function getTasksCompleted(tasks) {
@@ -23,6 +26,7 @@ function createTask(title) {
     //     <p class="task-title">leetcode exercises</p>
     //     <button class="close-task">X</button>
     // </div>
+    totalTasks += 1;
 
     const task = document.createElement('div');
     task.className = 'task';
@@ -44,6 +48,27 @@ function createTask(title) {
     task.appendChild(closeBtn);
 
     tasks.appendChild(task);
+
+    closeBtn.addEventListener('click', () => {
+        tasks.removeChild(task);
+        if (checkbox.checked) {
+            tasksComplete -= 1;
+        }
+        totalTasks -= 1;
+        updateTasksCompleted();
+    });
+
+    checkbox.addEventListener('click', () => {
+        if (checkbox.checked) {
+            tasksComplete += 1;
+        } else {
+            tasksComplete -= 1;
+        }
+        updateTasksCompleted();
+    })
+
+    // checkbox.addEventListener('')
+    updateTasksCompleted();
 }
 
 form.addEventListener('submit', (event) => {
@@ -52,6 +77,7 @@ form.addEventListener('submit', (event) => {
 
     if (task) {
         console.log('Adding task:', task);
+        createTask(task);
         taskInputField.value = ''; 
     } else {
         console.log('Task is empty!');
@@ -68,7 +94,7 @@ fetch('../tasks.json')
             createTask(content)
             console.log(content);
         }
-        updateTasksCompleted(getTasksCompleted(tasks), tasks.length);
+        updateTasksCompleted();
     })
 
 console.log('Hello World!');
