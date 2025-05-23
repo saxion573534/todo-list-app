@@ -84,17 +84,17 @@ form.addEventListener('submit', (event) => {
     }
 });
 
-fetch('../docs/tasks.json')
-    .then((response) => response.json())
-    .then((tasks) => {
-        for (let task of tasks) {
-            const content = task.content
-            const complete = task.complete
-            const created = task.created
-            createTask(content)
-            console.log(content);
-        }
-        updateTasksCompleted();
-    })
+// fetch('../docs/tasks.json')
+//     .then((response) => response.json())
+//     .then((tasks) => {
+//         for (let task of tasks) {
+//             const content = task.content
+//             const complete = task.complete
+//             const created = task.created
+//             createTask(content)
+//             console.log(content);
+//         }
+//         updateTasksCompleted();
+//     })
 
-console.log('Hello World!');
+updateTasksCompleted();
