@@ -84,7 +84,7 @@ form.addEventListener('submit', (event) => {
     }
 });
 
-fetch('../tasks.json')
+fetch('../docs/tasks.json')
     .then((response) => response.json())
     .then((tasks) => {
         for (let task of tasks) {
