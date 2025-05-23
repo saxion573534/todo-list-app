@@ -1,4 +1,4 @@
-# Todo List 💖
+# Todo List App
 
 A simple and clean todo list app built with HTML, CSS, and JavaScript.
 
