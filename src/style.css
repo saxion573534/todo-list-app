@@ -80,6 +80,8 @@ form {
     width: 100%;
     gap: 0.67rem;
     height: 13.5rem;
+    overflow: auto;
+    padding-bottom: 9px;
 }
 
 .task {

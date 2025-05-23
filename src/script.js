@@ -96,5 +96,3 @@ fetch('../tasks.json')
         }
         updateTasksCompleted();
     })
-
-console.log('Hello World!');
